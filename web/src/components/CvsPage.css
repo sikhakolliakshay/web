@@ -1,0 +1,19 @@
+.cvs-page {
+    padding: 20px;
+}
+
+.cvs-list {
+    margin-top: 20px;
+}
+
+.cv-card {
+    margin-bottom: 16px;
+}
+
+.edit-button {
+    margin-right: 8px;
+}
+
+.delete-button {
+    margin-left: 8px;
+}

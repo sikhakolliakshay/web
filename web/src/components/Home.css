@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@600&display=swap');
+
+.home-container {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  background-image: url('/src/images/footballjpg.jpeg'); /* Make sure the path is correct */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: -1;
+}
+
+.logo-container {
+  margin-bottom: 50px;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+.home-container h1 {
+  color: #ffffff; /* White text */
+  font-family: 'Poppins', sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  margin: 10px 0;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+}
+
+.home-container p {
+  color: #ffffff; /* White text */
+  font-family: 'Roboto', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+  margin: 0 0 30px 0;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Styles for Sign In button */
+.btn-signin {
+  padding: 10px 40px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 30px; /* Rounded corners */
+  cursor: pointer;
+  background-color: #007bff;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-signin:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.btn-signin:active {
+  background-color: #004494;
+  transform: scale(0.95);
+}
+
+/* Styles for Sign Up button */
+.btn-signup {
+  padding: 10px 40px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: #28a745;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-signup:hover {
+  background-color: #218838;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.btn-signup:active {
+  background-color: #1e7e34;
+  color: #ffffff;
+  transform: scale(0.95);
+}

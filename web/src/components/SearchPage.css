@@ -1,0 +1,24 @@
+.search-page-container {
+    padding: 20px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-button {
+    margin-left: 10px;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .search-page-container h1 {
+    color: #000000;
+    text-align: center;
+    font-size: 48px;
+
+  }

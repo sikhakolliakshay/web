@@ -1,0 +1,94 @@
+/* FilePage.css */
+
+/* General Styles */
+.file-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.return-button {
+  margin-bottom: 20px;
+}
+
+.header-title-container {
+  flex: 1;
+  text-align: center; /* Center text horizontally */
+}
+
+.header-title-container h1 {
+  font-size: 50px;
+  margin: 0; /* Remove default margin */
+}
+
+/* Add Media Form Styles */
+.add-media-form {
+  margin-bottom: 40px;
+}
+
+.add-media-form .ant-form-item {
+  margin-bottom: 16px;
+}
+
+/* Media List Styles */
+.media-list h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.media-list .ant-list-item {
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.media-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.media-item h3 {
+  font-size: 18px;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.media-item p {
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.media-item a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.media-item a:hover {
+  text-decoration: underline;
+}
+
+/* Button Styles */
+.ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.ant-btn-primary:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.ant-btn-link {
+  color: #1890ff;
+}
+
+.ant-btn-link:hover {
+  color: #40a9ff;
+}

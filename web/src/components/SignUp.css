@@ -1,0 +1,109 @@
+
+/* General container styles */
+.signup-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  /* Left side styles */
+  .signup-left {
+    flex: 1;
+    background-color: rgb(168, 3, 3); /* Red background */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    color: #fff; /* White text */
+    font-family: 'Roboto', sans-serif;
+    animation: fadeInLeft 1.5s ease-in-out; /* Fade-in effect for the entire left section */
+  }
+  
+  .signup-left h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-in-out; /* Fade-in and move down */
+    color: #fff; /* Ensure the text is white */
+  }
+  
+  /* Button styles */
+  .signup-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff; /* White text */
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    animation: fadeInUp 1s ease-in-out 0.5s; /* Fade-in and move up, with a slight delay */
+  }
+  
+  .signup-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .signup-button:active {
+    background-color: #004494;
+    transform: scale(0.95);
+  }
+  
+  /* Right side styles */
+  .signup-right {
+    flex: 1;
+    background-image: url('/src/images/image.png'); /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    animation: fadeInRight 1.5s ease-in-out; /* Fade-in effect for the right image */
+  }
+  
+  /* Keyframes for animations */
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+

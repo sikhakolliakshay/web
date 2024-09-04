@@ -1,0 +1,80 @@
+
+/* Container for the entire profile selection page */
+.profile-selection-container {
+    background-color: aquamarine;
+    background-image: url(/src/images/Footpitch.jpg); /* Replace with your image path */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the image */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* Styling for the heading text */
+  .profile-selection-container h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #ffffff; /* White text color */
+    letter-spacing: 1.5px; /* Spacing between letters */
+    animation: fadeInDown 1.5s ease-in-out; /* Fade-in animation from the top */
+  }
+  
+  /* Container for all profile buttons */
+  .profile-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Space between buttons */
+  }
+  
+  /* Styling for individual profile buttons */
+  .profile-button {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 15px 30px; /* Padding inside the button */
+    font-size: 18px; /* Font size */
+    border-radius: 30px; /* Increased rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition on hover */
+    width: 100%; /* Full width within the container */
+    max-width: 300px; /* Limit the maximum width of the buttons */
+    animation: fadeInUp 1.5s ease-in-out; /* Fade-in animation from the bottom */
+  }
+  
+  /* Hover effect for the profile buttons */
+  .profile-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Remove focus outline from the buttons */
+  .profile-button:focus {
+    outline: none;
+  }
+  
+  /* Keyframes for the fade-in animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
