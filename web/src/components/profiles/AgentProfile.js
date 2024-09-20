@@ -4,6 +4,7 @@ import districtsData from '../../GeoLocation/District.json';
 import wardsData from '../../GeoLocation/Wards.json';
 import './AgentProfile.css';
 import axios from 'axios';  // Import axios for HTTP requests
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 function AgentProfile() {
@@ -38,6 +39,7 @@ function AgentProfile() {
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Extract regions from JSON data
@@ -84,116 +86,116 @@ function AgentProfile() {
   return (
     <div className="agent-profile-container">
       <div className="agent-profile-header">
-        Agent Profile Registration
+        {t("agent_profile_information")}
       </div>
       <form className="agent-profile-form" onSubmit={handleSubmit}>
         
         {/* Other fields remain the same */}
         <div className="form-group">
-          <label className="mandatory">Company Name</label>
+          <label className="mandatory">{t("company_name")}</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Company Title</label>
+          <label className="mandatory">{t("company_title")}</label>
           <input type="text" name="companyTitle" value={formData.companyTitle} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label>Company Description</label>
+          <label>{t("company_description")}</label>
           <textarea name="companyDescription" value={formData.companyDescription} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label className="mandatory">Start Date</label>
+          <label className="mandatory">{t("start_Date")}</label>
           <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} required />
         </div>
         {/* Agent Information */}
         <div className="form-group">
-          <label className="mandatory">First Name</label>
+          <label className="mandatory">{t("first_name")}</label>
           <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Last Name</label>
+          <label className="mandatory">{t("last_name")}</label>
           <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Phone Number</label>
+          <label className="mandatory">{t("phone_number")}</label>
           <input type="text" name="phone" value={formData.phone} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Password</label>
+          <label className="mandatory">{t("password")}</label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Confirm Password</label>
+          <label className="mandatory">{t("confirm_password")}</label>
           <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Gender</label>
+          <label className="mandatory">{t("gender")}</label>
           <select name="gender" value={formData.gender} onChange={handleChange} required>
-            <option value="">Select Gender</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
+            <option value="">{t('select_gender')}</option>
+            <option value="MALE">{t("male")}</option>
+            <option value="FEMALE">{t('female')}</option>
           </select>
         </div>
         <div className="form-group">
-          <label className="mandatory">Nationality</label>
+          <label className="mandatory">{t("nationality")}</label>
           <input type="text" name="nationality" value={formData.nationality} onChange={handleChange} required />
         </div>
         {/* Location of Residence */}
         <div className="form-group">
-          <label className="mandatory">Region</label>
+          <label className="mandatory">{t('region')}</label>
           <select name="region" value={formData.region} onChange={handleChange} required>
-            <option value="">Select Region</option>
+            <option value="">{t('select_region')}</option>
             {regions.map(region => <option key={region} value={region}>{region}</option>)}
           </select>
         </div>
         <div className="form-group">
-          <label className="mandatory">District</label>
+          <label className="mandatory">{t('district')}</label>
           <select name="district" value={formData.district} onChange={handleChange} required>
-            <option value="">Select District</option>
+            <option value="">{t('select_district')}</option>
             {districts.map(district => <option key={district} value={district}>{district}</option>)}
           </select>
         </div>
         <div className="form-group">
-          <label className="mandatory">Ward</label>
+          <label className="mandatory">{t('ward')}</label>
           <select name="ward" value={formData.ward} onChange={handleChange} required>
-            <option value="">Select Ward</option>
+            <option value="">{t('select_ward')}</option>
             {wards.map(ward => <option key={ward} value={ward}>{ward}</option>)}
           </select>
         </div>
         <div className="form-group">
-          <label>Street</label>
+          <label>{t('street')}</label>
           <input type="text" name="street" value={formData.street} onChange={handleChange} />
         </div>
         {/* Contact Info */}
         <div className="form-group">
-          <label>Email</label>
+          <label>{t('email')}</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Contact Number</label>
+          <label>{t('contact_number')}</label>
           <input type="text" name="contactNumber" value={formData.contactNumber} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Facebook</label>
+          <label>{t('facebook')}</label>
           <input type="text" name="facebook" value={formData.facebook} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>YouTube</label>
+          <label>{t('youtube')}</label>
           <input type="text" name="youtube" value={formData.youtube} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Instagram</label>
+          <label>{t('instagram')}</label>
           <input type="text" name="instagram" value={formData.instagram} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Twitter</label>
+          <label>{t('twitter')}</label>
           <input type="text" name="twitter" value={formData.twitter} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>LinkedIn</label>
+          <label>{t('linkedIn')}</label>
           <input type="text" name="linkedin" value={formData.linkedin} onChange={handleChange} />
         </div>
-        <button type="submit" className="submit-button">Submit</button>
+        <button type="submit" className="submit-button">{t('submit')}</button>
       </form>
     </div>
   );

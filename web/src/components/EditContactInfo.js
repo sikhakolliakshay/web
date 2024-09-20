@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, message } from 'antd';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import './EditContactInfo.css';
 
 const EditContactInfo = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [user, setUser] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -41,41 +43,41 @@ const EditContactInfo = () => {
     try {
       const userId = localStorage.getItem('userId');
       await axios.patch(`${process.env.REACT_APP_BASE_URL}/v1/users/${userId}`, values);
-      message.success('Contact information updated successfully');
+      message.success(t("contact_updated"));
       navigate('/account'); // Navigate back to the account page
     } catch (error) {
-      message.error('Failed to update contact information');
+      message.error(t("failed_updated_profile"));
     }
   };
 
   return (
     <div className="edit-contact-info">
-      <h2>Edit Contact Information</h2>
+      <h2>{t("edit_contact_information")}</h2>
       <Form form={form} onFinish={handleSubmit} layout="vertical">
-        <Form.Item label="Email" name="email">
+        <Form.Item label={t("email")} name="email">
           <Input />
         </Form.Item>
-        <Form.Item label="Contact Number" name="contact_number">
+        <Form.Item label={t("contact_number")} name="contact_number">
           <Input />
         </Form.Item>
-        <Form.Item label="Facebook" name="facebook">
+        <Form.Item label={t("facebook")} name="facebook">
           <Input />
         </Form.Item>
-        <Form.Item label="YouTube" name="youtube">
+        <Form.Item label={t("youtube")} name="youtube">
           <Input />
         </Form.Item>
-        <Form.Item label="Instagram" name="instagram">
+        <Form.Item label={t("instagram")} name="instagram">
           <Input />
         </Form.Item>
-        <Form.Item label="Twitter" name="twitter">
+        <Form.Item label={t("twitter")} name="twitter">
           <Input />
         </Form.Item>
-        <Form.Item label="LinkedIn" name="linkedin">
+        <Form.Item label={t("linkedIn")} name="linkedin">
           <Input />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Update Contact Info
+            {t("update_contact")}
           </Button>
         </Form.Item>
       </Form>

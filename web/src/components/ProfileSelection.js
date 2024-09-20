@@ -2,38 +2,40 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./ProfileSelection.css"; // Import the CSS file
 
 function ProfileSelection() {
   const navigate = useNavigate();
+   const { t } = useTranslation();
 
   return (
     <div className="profile-selection-container">
-      <h1>Select Your Profile</h1>
+      <h1>{t("select_profile")}</h1>
       <div className="profile-buttons">
         <button className="profile-button" onClick={() => navigate("/signup/player")}>
-          Player Profile
+          {t("player_profile")}
         </button>
         <button className="profile-button" onClick={() => navigate("/signup/coach")}>
-          Coach Profile
+          {t("coach_profile")}
         </button>
         <button className="profile-button" onClick={() => navigate("/signup/guardian")}>
-          Guardian Profile
+          {t("guardian_profile")}
         </button>
         <button className="profile-button" onClick={() => navigate("/signup/academy")}>
-          Academy Profile
+          {t("academy_profile")}
         </button>
         <button className="profile-button" onClick={() => navigate("/signup/vendor")}>
-          Vendor Profile
+          {t("vendor_profile")}
         </button>
         <button className="profile-button" onClick={() => navigate("/signup/referee")}>
-          Referee Profile
+          {t("referee_profile")}
         </button>
         <button className="profile-button" onClick={() => navigate("/signup/agent")}>
-          Agent Profile
+          {t("agent_profile")}
         </button>
         <button className="profile-button" onClick={() => navigate("/signup/sponsor")}>
-          Sponsor Profile
+          {t("sponsor_profile")}
         </button>
       </div>
     </div>

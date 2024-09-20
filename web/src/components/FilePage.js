@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, List, message, Typography, Radio } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import './FilePage.css';
 
@@ -13,6 +14,7 @@ const FilePage = () => {
   const [userData, setUserData] = useState(null); // State for user data
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const userId = localStorage.getItem('userId'); // Get userId from localStorage
 
   useEffect(() => {
@@ -59,28 +61,28 @@ const FilePage = () => {
         url,
         createdBy: userId,
       });
-      message.success('Media added successfully');
+      message.success(t("media_added_sucessfully"));
       form.resetFields();
 
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/v1/medias`);
       setMediaItems(response.data.data || []);
     } catch (error) {
-      message.error('Failed to add media');
-      console.error('Error adding media:', error);
+      message.error(t("failed_add_media"));
+      console.error(t("error_add_media"), error);
     }
   };
 
   const handleDeleteMedia = async (mediaId) => {
     try {
       await axios.delete(`${process.env.REACT_APP_BASE_URL}/v1/medias/${mediaId}`);
-      message.success('Media deleted successfully');
+      message.success(t("media_deleted_successfully"));
 
       // Refresh the media items
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/v1/medias`);
       setMediaItems(response.data.data || []);
     } catch (error) {
-      message.error('Failed to delete media');
-      console.error('Error deleting media:', error);
+      message.error(t("failed_deletd_media"));
+      console.error(t("error_delete_media"), error);
     }
   };
 
@@ -88,10 +90,10 @@ const FilePage = () => {
     <div className="file-page">
       <div className="header">
       <Button onClick={() => navigate('/account')} className="return-button">
-        Return to Account Page
+        {t("return_page")}
       </Button>
       <div className="header-title-container">
-        <h1>Media File</h1>
+        <h1>{t("media_text")}</h1>
       </div>
     </div>
 
@@ -104,46 +106,46 @@ const FilePage = () => {
         >
           <Form.Item
             name="title"
-            label="Title"
+            label={t("media_Title")}
             rules={[{ required: true, message: 'Please enter the title' }]}
           >
             <Input placeholder="Enter media title" />
           </Form.Item>
           <Form.Item
             name="description"
-            label="Description"
+            label={t("media_Description")}
           >
             <Input.TextArea placeholder="Enter description" />
           </Form.Item>
           <Form.Item
             name="type"
-            label="Type"
+            label={t("media_Type")}
             rules={[{ required: true, message: 'Please select the type' }]}
           >
             <Radio.Group>
-              <Radio value="Image">Image</Radio>
-              <Radio value="Link">Link</Radio>
+              <Radio value="Image">{t("media_Image")}</Radio>
+              <Radio value="Link">{t("media_Link")}</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item
             name="url"
-            label="URL"
+            label={t("media_Url")}
             rules={[{ required: true, message: 'Please enter the URL' }]}
           >
             <Input placeholder="Enter media URL" />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={loading}>
-              Add File
+              {t("media_add_file")}
             </Button>
           </Form.Item>
         </Form>
       </div>
 
       <div className="media-list">
-        <h2>Existing Media</h2>
+        <h2>{t("media_exisiting")}</h2>
         {loading ? (
-          <p>Loading...</p>
+          <p>{t("media_loading")}</p>
         ) : (
           <List
             dataSource={mediaItems}
@@ -155,16 +157,16 @@ const FilePage = () => {
                     icon={<DeleteOutlined />}
                     onClick={() => handleDeleteMedia(item._id)}
                   >
-                    Delete
+                    {t("media_delete")}
                   </Button>,
                 ]}
               >
                 <div className="media-item">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <p>Type: {item.type}</p>
+                  <p>{t("media_Type")}  : {item.type}</p>
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    View Media
+                    {t("media_view")}
                   </a>
                 </div>
               </List.Item>

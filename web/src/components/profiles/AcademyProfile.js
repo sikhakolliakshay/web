@@ -5,6 +5,7 @@ import districtsData from '../../GeoLocation/District.json';
 import wardsData from '../../GeoLocation/Wards.json';
 import './AcademyProfile.css';
 import axios from 'axios';  // Import axios for HTTP requests
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 function AcademyProfile() {
@@ -38,6 +39,7 @@ function AcademyProfile() {
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
   const navigate = useNavigate();
+  const { t } =  useTranslation();
 
   useEffect(() => {
     setRegions(regionsData.features.map(region => region.properties.region));
@@ -81,108 +83,108 @@ function AcademyProfile() {
   return (
     <div className="academy-profile-container">
       <div className="academy-profile-header">
-        Academy Profile Registration
+        {t("academy_profile_information")}
       </div>
       <form className="academy-profile-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="mandatory">Academy Name</label>
+          <label className="mandatory">{t('academy_name')}</label>
           <input type="text" name="academyName" value={formData.academyName} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Academy Registration Number</label>
+          <label className="mandatory">{t('academy_registration_number')}</label>
           <input type="text" name="academyRegistration" value={formData.academyRegistration} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Academy Bio</label>
+          <label className="mandatory">{t('academy_bio')}</label>
           <textarea name="academyBio" value={formData.academyBio} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Academy Start Date</label>
+          <label className="mandatory">{t('academy_start_date')}</label>
           <input type="date" name="dob" value={formData.dob} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Contact Person's First Name</label>
+          <label className="mandatory">{t('contact_person_first_name')}</label>
           <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Contact Person's Last Name</label>
+          <label className="mandatory">{t('contact_person_last_name')}</label>
           <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
         </div>
       
         <div className="form-group">
-          <label className="mandatory">Phone Number</label>
+          <label className="mandatory">{t('phone_number')}</label>
           <input type="text" name="phone" value={formData.phone} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Password</label>
+          <label className="mandatory">{t('password')}</label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">Confirm Password</label>
+          <label className="mandatory">{t('confirm_password')}</label>
           <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label className="mandatory">TAFOCA Membership Status</label>
+          <label className="mandatory">{t('tafoca_membership')}</label>
           <select name="tafoca" value={formData.tafoca} onChange={handleChange} required>
-            <option value="">Select TAFOCA Membership Status</option>
-            <option value="YES">Yes</option>
-            <option value="NO">No</option>
+            <option value="">{t('select_tafoca_membership')}</option>
+            <option value="YES">{t('yes')}</option>
+            <option value="NO">{t('no')}</option>
           </select>
         </div>
         <div className="form-group">
-          <label className="mandatory">Region</label>
+          <label className="mandatory">{t('region')}</label>
           <select name="region" value={formData.region} onChange={handleChange} required>
-            <option value="">Select Region</option>
+            <option value="">{t('select_region')}</option>
             {regions.map(region => <option key={region} value={region}>{region}</option>)}
           </select>
         </div>
         <div className="form-group">
-          <label className="mandatory">District</label>
+          <label className="mandatory">{t('district')}</label>
           <select name="district" value={formData.district} onChange={handleChange} required>
-            <option value="">Select District</option>
+            <option value="">{t('select_district')}</option>
             {districts.map(district => <option key={district} value={district}>{district}</option>)}
           </select>
         </div>
         <div className="form-group">
-          <label className="mandatory">Ward</label>
+          <label className="mandatory">{t('ward')}</label>
           <select name="ward" value={formData.ward} onChange={handleChange} required>
-            <option value="">Select Ward</option>
+            <option value="">{t('select_ward')}</option>
             {wards.map(ward => <option key={ward} value={ward}>{ward}</option>)}
           </select>
         </div>
         <div className="form-group">
-          <label>Street</label>
+          <label>{t('street')}</label>
           <input type="text" name="street" value={formData.street} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Contact Email</label>
+          <label>{t('email')}</label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Contact Number</label>
+          <label>{t('contact_number')}</label>
           <input type="text" name="contactNumber" value={formData.contactNumber} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Facebook</label>
+          <label>{t('facebook')}</label>
           <input type="text" name="facebook" value={formData.facebook} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Youtube</label>
+          <label>{t('youtube')}</label>
           <input type="text" name="youtube" value={formData.youtube} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Instagram</label>
+          <label>{t('instagram')}</label>
           <input type="text" name="instagram" value={formData.instagram} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Twitter</label>
+          <label>{t('twitter')}</label>
           <input type="text" name="twitter" value={formData.twitter} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>LinkedIn</label>
+          <label>{t('linkedIn')}</label>
           <input type="text" name="linkedin" value={formData.linkedin} onChange={handleChange} />
         </div>
-        <button type="submit" className="submit-button">Submit</button>
+        <button type="submit" className="submit-button">{t('submit')}</button>
       </form>
     </div>
   );

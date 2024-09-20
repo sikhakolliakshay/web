@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Row, Col, Form, Input, Button, message, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ground from "../images/pexels-tima-miroshnichenko-6078297.jpg";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
+import './SignIn.css';
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -19,21 +27,14 @@ const SignIn = () => {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/users/login`, payload);
 
       if (response.status === 200 && response.data) {
-        console.log(response.data);
-
-        // Handling account suspension
         if (response.data.suspend) {
           message.error("Account Has Been Suspended. Contact Admin.");
           return;
         }
 
-        // Store user ID in local storage
         localStorage.setItem("userId", response.data._id);
-
-        // Set user data and navigate to user dashboard
         navigate("/users", { state: { user: response.data } });
 
-        // Welcome message
         const user = response.data;
         const welcomeMessage = `Welcome ${
           user.type === "ACADEMY" ? user.academyName : `${user.firstName} ${user.lastName}`
@@ -71,69 +72,58 @@ const SignIn = () => {
   };
 
   return (
-    <Layout.Content style={{ height: "100vh", overflow: "hidden" }}>
-      <Row style={{ height: "100%" }}>
-        <Col span={12} style={{ height: "100%" }}>
-          <img
-            src={ground}
-            alt="ground"
-            style={{ objectFit: "cover", width: "100%", height: "100%" }}
-          />
-        </Col>
-        <Col span={12} style={{ padding: "16px" }}>
-          <Row justify="center" align="middle" style={{ height: "100%" }}>
-            <Col span={16}>
-              <h1 style={{ textAlign: "center", letterSpacing: "2px" }}>
-                SOKASOKO-WEB
-              </h1>
-              <Form
-                name="signin"
-                layout="vertical"
-                requiredMark="optional"
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                size="large"
-              >
-                <Form.Item
-                  label="Username/Phone Number"
-                  name="username"
-                  rules={[
-                    { required: true, message: "The phone or account number is required" },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
+    <Layout.Content className={`sign-in-container ${isVisible ? 'slide-in' : ''}`}>
+      <div className="form-box">
+        <h1 className="sign-in-header">{t("sokasoko_web")}</h1>
+        <Form
+          name="signin"
+          layout="vertical"
+          requiredMark="optional"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          size="large"
+        >
+          <Form.Item
+            label={t("usernameOrphonenumber")}
+            name="username"
+            rules={[
+              { required: true, message: "The phone or account number is required" },
+            ]}
+          >
+            <Input
+              prefix={<UserOutlined />}
+              placeholder="Enter your username or phone number"
+            />
+          </Form.Item>
 
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    { required: true, message: "The password must not be empty" },
-                  ]}
-                >
-                  <Input.Password />
-                </Form.Item>
+          <Form.Item
+            label={t("user_password")}
+            name="password"
+            rules={[{ required: true, message: "The password must not be empty" }]}
+          >
+            <Input.Password
+              prefix={<LockOutlined />}
+              placeholder="Enter your password"
+            />
+          </Form.Item>
 
-                <Form.Item>
-                  <Row gutter={16}>
-                    <Col span={12}>
-                      <Button type="primary" block htmlType="submit" loading={loading}>
-                        {loading ? <Spin /> : "Login"}
-                      </Button>
-                    </Col>
-                    <Col span={12}>
-                      <Button type="default" block onClick={goToSignUp}>
-                        Sign Up
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form.Item>
-              </Form>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+          <Form.Item>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Button type="primary" block htmlType="submit" loading={loading}>
+                  {loading ? <Spin /> : t("login") }
+                </Button>
+              </Col>
+              <Col span={12}>
+                <Button type="default" block onClick={goToSignUp}>
+                  {t("signUp")}
+                </Button>
+              </Col>
+            </Row>
+          </Form.Item>
+        </Form>
+      </div>
     </Layout.Content>
   );
 };

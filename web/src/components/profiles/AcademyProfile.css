@@ -1,21 +1,21 @@
-/* src/components/AcademyProfile.css */
-
+/* Academy profile header */
 .academy-profile-header {
-        width: 100%;
-        height: 200px; /* Set an appropriate height */
-        background-color:  #333; /* Adjust the path to your image */
-        background-size: cover;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 36px;
-        font-weight: bold;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional, for better text visibility */
-        margin-bottom: 20px; /* Space between the header and form */
-        border-radius: 10px;
+    width: 100%;
+    height: 200px; /* Set an appropriate height */
+    background-color: #333; /* You can adjust this color as needed */
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional, for better text visibility */
+    margin-bottom: 20px; /* Space between the header and form */
+    border-radius: 10px;
 }
 
+/* Profile container with background image */
 .academy-profile-container {
     width: 97.5%;
     max-width: 100%;
@@ -23,15 +23,28 @@
     margin: 0 auto;
     padding: 20px;
     background: linear-gradient(
-      rgba(255, 255, 255, 0.8), /* semi-transparent white */
-      rgba(0, 0, 0, 0.2) /* black with low opacity */
-  ),
-  url('/src/images/academy.jpg') no-repeat center center;
-  background-size: cover; /* Ensure the image covers the container */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        rgba(255, 255, 255, 0.8), /* semi-transparent white */
+        rgba(0, 0, 0, 0.2) /* black with low opacity */
+    ),
+    url('/src/images/academy.jpg') no-repeat center center;
+    background-size: cover; /* Ensure the image covers the container */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Responsive styling for mobile */
+@media (max-width: 768px) {
+    .academy-profile-container {
+        background-size: contain; /* Adjust to contain the image for mobile */
+        background-position: top; /* Align image for better fit on mobile */
+    }
+    .academy-profile-header {
+        font-size: 28px; /* Reduce font size on mobile */
+        height: 150px; /* Adjust height on smaller screens */
+    }
+}
+
+/* Form styling */
 .academy-profile-form {
     display: flex;
     flex-direction: column;
@@ -75,7 +88,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth background color transition */
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -83,12 +96,23 @@ button:hover {
 }
 
 .academy-profile-container h1 {
-    text-align: center; /* Center the heading */
+    text-align: center;
     font-size: 48px;
     margin-left: 20px;
     color: #333;
 }
 
+/* Subheading styling */
 h2 {
     margin-top: 20px; /* Add space above subheadings */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .academy-profile-container h1 {
+        font-size: 32px; /* Reduce heading font size for mobile */
+    }
+    button {
+        padding: 8px 12px; /* Adjust button padding for smaller screens */
+    }
 }

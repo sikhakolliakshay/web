@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
@@ -17,13 +18,20 @@ import SearchPage from './components/SearchPage';
 import AccountPage from './components/AccountPage';
 import FilePage from './components/FilePage'; 
 import CvsPage from './components/CvsPage';
-import EditProfile from './components/EditProfile'; // Import EditProfile component
-import EditContactInfo from './components/EditContactInfo'; // Import EditContactInfo component
-
+import EditProfile from './components/EditProfile';
+import EditContactInfo from './components/EditContactInfo';
+import './i18n'; //Import i18n configuration
 
 function App() {
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <Router>
+      <div className='App'>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
@@ -40,16 +48,15 @@ function App() {
         <Route path="/users" element={<UserPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/account" element={<AccountPage />} />
-        <Route path="/files" element={<FilePage />} /> {/* Add route for FilePage */}
-        <Route path="/cvs" element={<CvsPage />} /> {/* Add route for FilePage */}
-        <Route path="/edit-profile" element={<EditProfile />} /> {/* Route for EditProfile */}
-        <Route path="edit-contact-info" element={<EditContactInfo />} /> {/* Route for EditContactInfo */}
-        {/* Add routes for adding and editing CVs */}
-        {/* <Route path="/cvs/new" element={<NewCvPage />} />
-        <Route path="/cvs/:id/edit" element={<EditCvPage />} /> */}
+        <Route path="/files" element={<FilePage />} />
+        <Route path="/cvs" element={<CvsPage />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/edit-contact-info" element={<EditContactInfo />} />
 
+        {/* Fallback route */}
         <Route path="*" element={<SignIn />} />
       </Routes>
+    </div>
     </Router>
   );
 }

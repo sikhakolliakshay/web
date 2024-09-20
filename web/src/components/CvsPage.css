@@ -1,5 +1,30 @@
 .cvs-page {
     padding: 20px;
+    background: linear-gradient(to right, #ffde22, #ff8928, #ff414e), #4d7dcb; /* Add gradient and existing color */
+    min-height: 100vh; /* Ensure the container takes up at least the full viewport height */
+}
+
+.page-title {
+    font-size: 2.5em; /* Adjust size as needed */
+    font-weight: 10000;
+    margin-bottom: 20px; /* Adds space below the title */
+    text-align: center;
+    color: #ffde22;
+    margin: auto;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between; /* Space between the buttons */
+    margin-bottom: 20px; /* Space below the buttons */
+}
+
+.return-button {
+    margin-left: 10px; /* Pushes the button to the right */
+}
+
+.create-button {
+    margin-right: 10px; /* Pushes the button to the left */
 }
 
 .cvs-list {
@@ -8,6 +33,10 @@
 
 .cv-card {
     margin-bottom: 16px;
+    padding: 16px;
+    border: 1px solid #ddd; /* Adds a border to the CV cards */
+    border-radius: 8px; /* Rounds the corners of the CV cards */
+    background-color: #ffffff88; /* Sets a background color for the CV cards */
 }
 
 .edit-button {
@@ -16,4 +45,10 @@
 
 .delete-button {
     margin-left: 8px;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Centers the pagination controls */
 }

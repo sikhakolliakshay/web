@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Input, Button, Table, Select, message } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './SearchPage.css';
 
 const { Search } = Input;
@@ -15,6 +17,7 @@ function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [category, setCategory] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -62,37 +65,37 @@ function SearchPage() {
 
   const columns = [
     {
-      title: 'First Name',
+      title: t('first_name'),
       dataIndex: 'firstName',
       key: 'firstName',
     },
     {
-      title: 'Last Name',
+      title: t('last_name'),
       dataIndex: 'lastName',
       key: 'lastName',
     },
     {
-      title: 'Account Number',
+      title: t('account_number'),
       dataIndex: 'accountNumber',
       key: 'accountNumber',
     },
     {
-      title: 'Phone',
+      title: t('phone_number'),
       dataIndex: 'phone',
       key: 'phone',
     },
     {
-      title: 'Academy Name',
+      title: t('academy_name'),
       dataIndex: 'academy_name',
       key: 'academy_name',
     },
     {
-      title: 'Company Name',
+      title: t('company_name'),
       dataIndex: 'company_name',
       key: 'company_name',
     },
     {
-      title: 'Type',
+      title: t('type'),
       dataIndex: 'type',
       key: 'type',
     },
@@ -101,7 +104,9 @@ function SearchPage() {
   return (
     <div className="search-page-container">
       <header>
-        <h1>Search Users</h1>
+      <Link to="/users">
+      <h1>{t("search_users")}</h1>
+    </Link>
         <div className="search-bar">
           <Select
             placeholder="Select category"
@@ -109,13 +114,13 @@ function SearchPage() {
             onChange={(value) => setCategory(value)}
             value={category}
           >
-            <Option value="">All</Option>
-            <Option value="PLAYER">Player</Option>
-            <Option value="ACADEMY">Academy</Option>
-            <Option value="AGENT">Agent</Option>
-            <Option value="REFEREE">Referee</Option>
-            <Option value="GUARDIAN">Guardian</Option>
-            <Option value="COACH">Coach</Option>
+            <Option value="">{t("all")}</Option>
+            <Option value="PLAYER">{t('player')}</Option>
+            <Option value="ACADEMY">{t('academy')}</Option>
+            <Option value="AGENT">{t('agent')}</Option>
+            <Option value="REFEREE">{t('referee')}</Option>
+            <Option value="GUARDIAN">{t('guardian')}</Option>
+            <Option value="COACH">{t('coach')}</Option>
           </Select>
           <Search
             placeholder="Enter search criteria"
@@ -131,7 +136,7 @@ function SearchPage() {
             loading={loading}
             className="search-button"
           >
-            Search
+            {t('search')}
           </Button>
         </div>
       </header>

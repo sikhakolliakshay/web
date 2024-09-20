@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Input, DatePicker, Modal, message, Select, Switch, Pagination } from 'antd';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import './CvsPage.css';
 
 const { Option } = Select;
 
@@ -16,6 +18,7 @@ const CvsPage = () => {
   const [currentCv, setCurrentCv] = useState(null);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
@@ -69,17 +72,17 @@ const CvsPage = () => {
 
       if (editMode && currentCv) {
         await axios.patch(`${process.env.REACT_APP_BASE_URL}/v1/cvs/${currentCv._id}`, values);
-        message.success('CV updated successfully');
+        message.success(t("cv_updated_sucessfully"));
       } else {
         await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/cvs`, values);
-        message.success('CV created successfully');
+        message.success(t("cv_created_sucessfully"));
       }
 
       fetchCvs(currentPage, pageSize);
       handleCancel();
     } catch (error) {
-      message.error('Failed to submit CV');
-      console.error('Error submitting CV:', error);
+      message.error(t("failed_submit_cv"));
+      console.error(t("error_cv"), error);
     }
   };
 
@@ -97,7 +100,7 @@ const CvsPage = () => {
   const handleEdit = (cv) => {
     setCurrentCv(cv);
     form.setFieldsValue({
-      team_name: cv.name,
+      name: cv.name,
       person: cv.person,
       phone: cv.phone,
       type: cv.type,
@@ -112,89 +115,90 @@ const CvsPage = () => {
   const handleDelete = async (cvId) => {
     try {
       await axios.delete(`${process.env.REACT_APP_BASE_URL}/v1/cvs/${cvId}`);
-      message.success('CV deleted successfully');
+      message.success(t("cv_deleted_successfully"));
       fetchCvs(currentPage, pageSize);
     } catch (error) {
-      message.error('Failed to delete CV');
-      console.error('Error deleting CV:', error);
+      message.error(t("failed_delete_cv"));
+      console.error(t("error_delete_cv"), error);
     }
   };
 
   return (
-    <div className="cvs-page">
-      <Button type="primary" onClick={() => navigate('/account')}>
-        Return to Account Page
-      </Button>
+<div className="cvs-page">
+    <h1 className="page-title">{t("cv_text")}</h1>
+    
+    <div className="buttons-container">
+        <Button type="primary" className="return-button" onClick={() => navigate('/account')}>
+            {t("return_page")}
+        </Button>
 
-      <Button type="primary" onClick={showModal} style={{ marginTop: 16 }}>
-        Create CV
-      </Button>
+        <Button type="primary" className="create-button" onClick={showModal}>
+            {t("create_cv")}
+        </Button>
+    </div>
 
-       {/* Display the total number of CVs */}
-       <div style={{ marginTop: 20 }}>
-        <h2>Total CVs: {cvs.length}</h2>
-      </div>
+    <div style={{ marginTop: 20 }}>
+        <h2>{t("total_cv")} {cvs.length}</h2>
+    </div>
 
-      <Modal title={editMode ? "Edit CV" : "Create CV"} visible={isModalVisible} onCancel={handleCancel} footer={null}>
+    <Modal title={editMode ? "Edit CV" : "Create CV"} visible={isModalVisible} onCancel={handleCancel} footer={null}>
         <Form form={form} onFinish={handleSubmit} layout="vertical">
-          <Form.Item name="name" label="Team Name" rules={[{ required: true, message: 'Please enter the team name' }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="person" label="Team Contact Person" rules={[{ required: true, message: 'Please enter the contact person\'s name' }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="phone" label="Contact Person Number" rules={[{ required: true, message: 'Please enter the contact person\'s phone number' }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="type" label="Contact Person Role" rules={[{ required: true, message: 'Please select the contact person\'s role' }]}>
-            <Select>
-              <Option value="Manager">Manager</Option>
-              <Option value="Coach">Coach</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item name="start_date" label="Start Date" rules={[{ required: true, message: 'Please select the start date' }]}>
-            <DatePicker format="YYYY-MM-DD" />
-          </Form.Item>
-          <Form.Item name="isCurrent" label="Is My Current Team" valuePropName="checked">
-            <Switch checkedChildren="Yes" unCheckedChildren="No" />
-          </Form.Item>
-          <Form.Item name="end_date" label="End Date">
-            <DatePicker format="YYYY-MM-DD" />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              {editMode ? "Update" : "Submit"}
-            </Button>
-          </Form.Item>
+            <Form.Item name="name" label={t("team_Name")} rules={[{ required: true, message: 'Please enter the team name' }]}>
+                <Input />
+            </Form.Item>
+            <Form.Item name="person" label={t("team_Contact_Name")} rules={[{ required: true, message: 'Please enter the contact person\'s name' }]}>
+                <Input />
+            </Form.Item>
+            <Form.Item name="phone" label={t("contact_Person_Number")} rules={[{ required: true, message: 'Please enter the contact person\'s phone number' }]}>
+                <Input />
+            </Form.Item>
+            <Form.Item name="type" label={t("contact_Person_Role")} rules={[{ required: true, message: 'Please select the contact person\'s role' }]}>
+                <Select>
+                    <Option value="Manager">{t("manager")}</Option>
+                    <Option value="Coach">{t("coach")}</Option>
+                </Select>
+            </Form.Item>
+            <Form.Item name="start_date" label={t("start_Date")} rules={[{ required: true, message: 'Please select the start date' }]}>
+                <DatePicker format="YYYY-MM-DD" />
+            </Form.Item>
+            <Form.Item name="isCurrent" label={t("current_Team")} valuePropName="checked">
+                <Switch checkedChildren={t("yes")} unCheckedChildren={t("no")} />
+            </Form.Item>
+            <Form.Item name="end_date" label={t("end_Date")}>
+                <DatePicker format="YYYY-MM-DD" />
+            </Form.Item>
+            <Form.Item>
+                <Button type="primary" htmlType="submit">
+                    {editMode ? t("update") : t("submit")}
+                </Button>
+            </Form.Item>
         </Form>
-      </Modal>
+    </Modal>
 
-      {/* Displaying the CVs */}
-      <div style={{ marginTop: 20 }}>
+    <div className="cvs-list">
         {cvs.map(cv => (
-          <div key={cv._id} style={{ marginBottom: 20 }}>
-            <h3>{cv.name}</h3>
-            <p><strong>Contact Person:</strong> {cv.person}</p>
-            <p><strong>Contact Number:</strong> {cv.phone}</p>
-            <p><strong>Role:</strong> {cv.type}</p>
-            <p><strong>Start Date:</strong> {moment(cv.start_date).format('YYYY-MM-DD')}</p>
-            <p><strong>Current Team:</strong> {cv.isCurrent ? "Yes" : "No"}</p>
-            {cv.end_date && <p><strong>End Date:</strong> {moment(cv.end_date).format('YYYY-MM-DD')}</p>}
-            <Button type="primary" onClick={() => handleEdit(cv)}>Edit</Button>
-            <Button type="danger" onClick={() => handleDelete(cv._id)} style={{ marginLeft: 10 }}>Delete</Button>
-          </div>
+            <div key={cv._id} className="cv-card">
+                <h3>{cv.name}</h3>
+                <p><strong>{t("contact_person")}:</strong> {cv.person}</p>
+                <p><strong>{t("contact_number")}:</strong> {cv.phone}</p>
+                <p><strong>{t("role")}:</strong> {cv.type}</p>
+                <p><strong>{t("start_Date")}:</strong> {moment(cv.start_date).format('YYYY-MM-DD')}</p>
+                <p><strong>{t("current_Team1")}:</strong> {cv.isCurrent ? "Yes" : "No"}</p>
+                {cv.end_date && <p><strong>{t("end_Date")}:</strong> {moment(cv.end_date).format('YYYY-MM-DD')}</p>}
+                <Button type="primary" className="edit-button" onClick={() => handleEdit(cv)}>{t("cv_edit")}</Button>
+                <Button type="danger" className="delete-button" onClick={() => handleDelete(cv._id)}>{t("cv_delete")}</Button>
+            </div>
         ))}
-      </div>
+    </div>
 
-      {/* Pagination controls */}
-      <Pagination
+    <Pagination
         current={currentPage}
         total={totalCvs}
         pageSize={pageSize}
         onChange={handlePageChange}
-        style={{ marginTop: 20 }}
-      />
-    </div>
+        className="pagination"
+    />
+</div>
   );
 };
 

@@ -1,24 +1,126 @@
+/* General container styles */
 .search-page-container {
-    padding: 20px;
-  }
-  
-  .search-bar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .search-button {
-    margin-left: 10px;
-  }
-  
-  .error-message {
-    color: red;
-  }
-  
-  .search-page-container h1 {
-    color: #000000;
-    text-align: center;
-    font-size: 48px;
+  padding: 0.5rem;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('/src/images/Userpage1.jpg'); /* Add background image */
+  background-size: cover;
+  background-position: center;
+}
 
+/* Header styles */
+header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.75rem; /* Decreased from 2.5rem */
+  color: #001529;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Search bar styles */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 600px; /* Decreased max-width from 800px */
+  margin: 0 auto;
+  padding: 0.3rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 6px; /* Slightly smaller border-radius */
+}
+
+.search-bar .ant-select {
+  margin-right: 8px; /* Decreased margin-right from 16px */
+}
+
+.search-bar .ant-input-search {
+  flex: 1;
+}
+
+.search-bar .search-button {
+  margin-left: 8px; /* Decreased margin-left from 16px */
+  background-color: #1890ff;
+  border-color: #1890ff;
+  padding: 4px 12px; /* Reduced padding */
+  font-size: 0.875rem; /* Smaller font size for button */
+}
+
+.search-bar .search-button:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+.search-bar .ant-input-search .ant-input {
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+/* Ant Table styles */
+.ant-table {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 0.875rem; /* Smaller font size for table */
+}
+
+.ant-table .ant-table-thead > tr > th {
+  background: #f5f5f5;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ant-table .ant-table-tbody > tr > td {
+  text-align: center;
+}
+
+.ant-table .ant-table-pagination {
+  text-align: right;
+  padding: 0.5rem;
+}
+
+.ant-table .ant-table-pagination .ant-pagination-item-active {
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+
+.ant-table .ant-table-pagination .ant-pagination-item:hover {
+  border-color: #40a9ff;
+}
+
+/* Responsive design adjustments for mobile */
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem;
   }
+
+  .search-bar .ant-select {
+    margin-right: 0;
+    margin-bottom: 8px; /* Smaller margin-bottom */
+  }
+
+  .search-bar .search-button {
+    margin-left: 0;
+    width: 100%; /* Full-width button for mobile */
+    padding: 6px 0; /* Adjust padding for mobile */
+    font-size: 0.875rem; /* Smaller button font size */
+  }
+
+  .ant-table {
+    font-size: 0.75rem; /* Smaller font size for mobile */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Smaller heading for mobile */
+  }
+}

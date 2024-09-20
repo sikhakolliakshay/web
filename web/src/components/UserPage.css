@@ -1,34 +1,80 @@
+/* src/components/UserPage.css */
+
+/* Container and Image Styles */
 .user-page-container {
   font-family: Arial, sans-serif;
   color: #333;
-  min-height: 100vh; /* Ensure it fits the main content area */
+  height: 100vh; /* Ensure the container takes up the full viewport height */
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 100%;
-  min-height: 100vh;
+  background-image: url('/src/images/UserPage5.png');
+  background-position: center;
+  background-attachment: fixed; /* Keeps the background fixed when scrolling */
+  background-size: cover;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  
 }
 
-
+/* Header Styles */
 header {
-  background-color: #007BFF;
-  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.416); /* Semi-transparent background */
+  color: #0000;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensure space between brand and logo */
+  z-index: 1000; /* Ensure header stays on top */
 }
 
+/* Navigation Bar */
+nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px; /* Padding on both sides */
+  box-sizing: border-box;
+}
+
+.brand {
+  font-size: 25px;
+  margin: 0;
+  color: #ad2521;
+  font-style: "Lucida Console", "League Spartan", monospace;
+  margin-right: auto; /* Ensure the brand text stays on the right */
+  text-align: right; /* Align the text to the right side */
+  padding-right: 20px; /* Add spacing between the brand text and logo */
+}
+
+.logo_1 {
+  width: 50px;
+  height: 50px;
+  padding-top: 3px;
+}
+
+/* Navigation Links */
 nav ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
 }
 
 nav ul li {
-  margin: 0 15px;
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
 }
 
 nav ul li a {
-  color: white;
+  color: #ad2521;
   text-decoration: none;
   font-weight: bold;
   display: flex;
@@ -38,45 +84,81 @@ nav ul li a {
 
 nav ul li a .icon {
   margin-right: 8px;
+  color: #ad2521;
 }
 
 nav ul li a.active,
 nav ul li a:focus,
 nav ul li a:active {
-  color: #004080; /* Darker blue color when clicked or active */
+  color: #0056b3;
+}
+/* Navigation Links */
+nav ul li a .icon {
+  margin-right: 8px;
+  color: #ad2521;
+  background-color: transparent; /* Change this from white to transparent */
+  padding: 5px; /* Optional: Add some padding around the icon */
+  border-radius: 50%; /* Optional: Make the background circular */
+  transition: background-color 0.3s ease;
 }
 
+nav ul li a:hover .icon {
+  background-color: #a9a8a8; /* Add background color on hover */
+}
+
+/* Language Switcher */
+.language-switcher1 {
+  margin-right: 10px;
+  background-color: transparent;
+  border: 1px solid #ad2521;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: #ad2521;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.language-switcher1:hover {
+  background-color: #ad2521;
+  color: white;
+  border-color: #ad2521;
+}
+
+.language-switcher1 .ant-select-selection-item {
+  color: inherit; /* Ensure text color matches the button */
+}
+
+
+
+/* Main Content Area */
 main {
   flex: 1;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: rgb(255, 255, 255); /* Slightly transparent */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 100px auto 20px; /* Account for the fixed header */
+  max-width: 800px;
 }
 
+/* Section Styling */
 section {
   text-align: center;
   background-color: #e9f7fe;
   padding: 50px 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  max-width: 800px;
+  margin: 90px auto;
+  max-width: 1000px;
+  height: 50%
 }
 
-h1 {
+h2 {
   color: #007BFF;
   margin-bottom: 20px;
 }
 
-footer {
-  background-color: #007BFF;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
-
+/* Account Details Section */
 .account-details {
   display: flex;
   flex-direction: column;
@@ -95,6 +177,7 @@ footer {
   margin-bottom: 20px;
 }
 
+/* Change Image Button */
 .change-image-btn {
   background-color: #007BFF;
   color: white;
@@ -111,6 +194,7 @@ footer {
   background-color: #0056b3;
 }
 
+/* Account Information */
 .account-info {
   width: 100%;
   max-width: 500px;
@@ -129,20 +213,40 @@ footer {
 .account-info-row span:last-child {
   font-weight: bold;
 }
-header nav ul {
-  list-style: none;
-  display: flex;
-  padding: 0;
-}
 
-header nav ul li {
-  margin-right: 20px;
-}
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .user-page-container {
+    background-size: cover; /* Ensure the image covers the viewport */
+    background-attachment: scroll; /* Prevent fixed background on mobile */
+  }
 
-header nav ul li a.active {
-  font-weight: bold;
-}
+  header {
+    height: 60px;
+  }
 
-.icon {
-  margin-right: 8px;
+  main {
+    padding: 10px;
+    max-width: 90%; /* Adjust content width for smaller screens */
+    margin: 80px auto 10px;
+  }
+
+  section {
+    padding: 30px 10px;
+    margin: 40px auto;
+    max-width: 90%; /* Adjust content width for smaller screens */
+  }
+
+  .account-details {
+    padding: 20px;
+    max-width: 90%; /* Adjust content width for smaller screens */
+  }
+
+  .account-info-row {
+    font-size: 14px; /* Reduce font size on mobile */
+  }
+
+  h2 {
+    font-size: 24px; /* Reduce heading size on mobile */
+  }
 }

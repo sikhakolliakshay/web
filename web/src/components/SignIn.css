@@ -1,96 +1,126 @@
-/* src/components/SignIn.css */
-
-/* Container and Image Styles */
+/* Main Container */
 .sign-in-container {
-    height: 100vh;
-    overflow-y: hidden;
-    display: flex;
+  width: 100vw; /* Ensures container covers the viewport width */
+  min-height: 100vh;
+  background-image: url('/src/images/SignIn1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Adjust duration here */
+}
+
+/* Transition Animation */
+.sign-in-container.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Overlay */
+.sign-in-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.5); /* Red overlay with 50% opacity */
+  z-index: 1; /* Ensure overlay is behind the form but above the background image */
+}
+
+/* Form Box */
+.form-box {
+  background: rgba(255, 255, 255, 0.633); /* Slightly transparent white background */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  position: relative; /* Ensure form box is above the overlay */
+  z-index: 2; /* Ensure form box is above the overlay */
+}
+
+/* Header (Centered) */
+.sign-in-header {
+  letter-spacing: 2px;
+  font-size: 30px; /* Increased font size */
+  font-weight: 1000;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #ad2521; /* Dark text on the white background */
+  font-family: 'Leauge Spartan';
+}
+
+/* Input Focus Animation */
+.ant-input:focus,
+.ant-input-password:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Button Styles */
+.ant-btn-primary {
+  transition: background-color 0.2s ease, transform 0.3s ease;
+}
+
+.ant-btn-primary:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.ant-btn-default {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.ant-btn-default:hover {
+  background-color: #e2e6ea;
+  transform: scale(1.05);
+}
+
+/* Loading Spinner Animation */
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #007bff;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
   }
-  
-  .sign-in-image {
-    object-fit: cover; /* Ensures the image covers the space */
-    width: 100%;
-    overflow-y: hidden;
-    height: 100%;
+  100% {
+      transform: rotate(360deg);
   }
-  
-  /* Header Styles */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .sign-in-header {
-    letter-spacing: 2px;
-    font-size: 36px; /* Adjust the font size as needed */
-    font-weight: bold; /* Optional: make the text bold */
-    margin-bottom: 16px; /* Add margin if needed */
-    opacity: 0;
-    animation: fadeIn 1.0s ease-out forwards;
-  }
-  
-  /* Form Styles */
-  .sign-in-form {
-    padding: 16px;
-    animation: slideIn 1.0s ease-out forwards;
-  }
-  
-  /* Button Styles */
-  .ant-btn-primary {
-    transition: background-color 0.2s ease, transform 0.3s ease;
-  }
-  
-  .ant-btn-primary:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-  
-  .ant-btn-default {
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .ant-btn-default:hover {
-    background-color: #e2e6ea;
-    transform: scale(1.05);
-  }
-  
-  /* Input Focus Animation */
-  .ant-input:focus, .ant-input-password:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  /* Loading Spinner Animation */
-  .loading-spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top: 4px solid #007bff;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-    margin: 10px auto;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* Animation Keyframes */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .sign-in-header {
       font-size: 24px;
-    }
-  
-    .sign-in-form {
-      padding: 16px;
-    }
   }
-  
+
+  .form-box {
+      width: 80%;
+  }
+}
+
+/* Icon Color */
+.ant-input-prefix,
+.ant-input-password-prefix {
+  color: #007bff; /* Set icon color */
+}
+
+.ant-input-prefix {
+  margin-right: 8px; /* Adjust space between icon and input text */
+}

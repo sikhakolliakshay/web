@@ -1,54 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { HomeOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons';
-import { Avatar, message } from 'antd';
-import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import Link, useLocation, and useNavigate
+import { Avatar, message, Select } from 'antd'; // Import Select for language switcher
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import './UserPage.css';
+import logo1 from '../images/logo_sokasoko.png';
+
+const { Option } = Select;
 
 function UserPage() {
   const [activeLink, setActiveLink] = useState('/home');
   const [userData, setUserData] = useState(null);
+  const { t, i18n } = useTranslation(); // Use the i18n object from react-i18next
   const location = useLocation();
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId"); // Get userId from localStorage
+  const userId = localStorage.getItem('userId'); // Get userId from localStorage
 
   useEffect(() => {
     if (!userId) {
-      // If userId is null, navigate to the "/" path
       navigate('/');
     } else {
-      // If userId is present, navigate to the "/users" path
       navigate('/users');
     }
   }, [userId, navigate]);
 
   useEffect(() => {
     if (userId) {
-      console.log('Fetching data for user ID:', userId);
       axios
         .get(`${process.env.REACT_APP_BASE_URL}/v1/users/${userId}`)
         .then((response) => {
-          console.log('User data:', response.data);
           setUserData(response.data);
         })
         .catch((error) => {
           message.error('Failed to fetch user data');
-          console.error('Error fetching user data:', error);
         });
     }
   }, [userId]);
 
   const handleLinkClick = (path) => {
     if (path === '/home') {
-      localStorage.removeItem('userId'); // Remove userId from localStorage
+      localStorage.removeItem('userId');
     }
     setActiveLink(path);
+  };
+
+  const changeLanguage = (value) => {
+    i18n.changeLanguage(value); // Change language
   };
 
   return (
     <div className="user-page-container">
       <header>
         <nav>
+          <img src={logo1} className="logo_1" alt="SokaSoko_logo" />
+          <h1 className="brand">SokaSoko Soccer</h1>
           <ul>
             <li>
               <Link
@@ -56,7 +62,7 @@ function UserPage() {
                 className={activeLink === '/home' ? 'active' : ''}
                 onClick={() => handleLinkClick('/home')}
               >
-                <Avatar icon={<HomeOutlined />} className="icon" /> Home
+                <Avatar icon={<HomeOutlined />} className="icon" /> {t('home')}
               </Link>
             </li>
             <li>
@@ -65,33 +71,46 @@ function UserPage() {
                 className={activeLink === '/search' ? 'active' : ''}
                 onClick={() => handleLinkClick('/search')}
               >
-                <Avatar icon={<SearchOutlined />} className="icon" /> Search
+                <Avatar icon={<SearchOutlined />} className="icon" /> {t('search')}
               </Link>
             </li>
             <li>
               <Link
                 to={{
-                  pathname: "/account",
-                  state: { user: { id: userId } } // Pass the user ID to AccountPage
+                  pathname: '/account',
+                  state: { user: { id: userId } },
                 }}
                 className={activeLink === '/account' ? 'active' : ''}
                 onClick={() => handleLinkClick('/account')}
               >
-                <Avatar icon={<UserOutlined />} className="icon" /> My Account
+                <Avatar icon={<UserOutlined />} className="icon" /> {t('my_account')}
               </Link>
             </li>
           </ul>
+          <Select
+            className="language-switcher1"
+            defaultValue={i18n.language}
+            onChange={changeLanguage}
+          >
+            <Option value="en">EN</Option>
+            <Option value="sw">SW</Option>
+          </Select>
         </nav>
       </header>
       <main>
         <section>
-          <h1>Welcome to the User Page</h1>
+          <h2>{t('welcome_text')}</h2>
           {userData ? (
             <div>
-              <p><strong>Name:</strong> {userData.firstName} {userData.lastName}</p>
-              <p><strong>Account Number:</strong> {userData.accountNumber}</p>
-              <p><strong>Phone:</strong> {userData.phone}</p>
-              {/* Add more user-specific details here */}
+              <p>
+                <strong>{t('name')}:</strong> {userData.firstName} {userData.lastName}
+              </p>
+              <p>
+                <strong>{t('account_number')}:</strong> {userData.accountNumber}
+              </p>
+              <p>
+                <strong>{t('phone')}:</strong> {userData.phone}
+              </p>
             </div>
           ) : (
             <p>Loading user data...</p>

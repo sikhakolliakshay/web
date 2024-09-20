@@ -1,9 +1,8 @@
-/* src/components/VendorProfile.css */
-
+/* Vendor profile header */
 .vendor-profile-header {
     width: 100%;
-    height: 200px; /* Set an appropriate height */
-    background-color:  #333; /* Adjust the path to your image */
+    height: 200px; /* Adjust height if necessary */
+    background-color: #333; /* Fallback color */
     background-size: cover;
     display: flex;
     align-items: center;
@@ -11,48 +10,55 @@
     color: white;
     font-size: 36px;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Optional, for better text visibility */
-    margin-bottom: 20px; /* Space between the header and form */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow for better readability */
+    margin-bottom: 20px;
     border-radius: 10px;
-  }
+}
 
+/* Vendor profile container with responsive background image */
 .vendor-profile-container {
     width: 95.5%;
     max-width: 100%;
-    min-height: 100vh;
+    min-height: 100vh; /* Full viewport height */
     margin: 0 auto;
     padding: 20px;
     background: linear-gradient(
-      rgba(255, 255, 255, 0.8), /* semi-transparent white */
-      rgba(0, 0, 0, 0.2) /* black with low opacity */
-  ),
-  url('/src/images/vendor.jpg') no-repeat center center;
-  background-size: cover; /* Ensure the image covers the container */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        rgba(255, 255, 255, 0.8), /* semi-transparent white */
+        rgba(0, 0, 0, 0.2) /* black with low opacity */
+    ),
+    url('/src/images/vendor.jpg') no-repeat center center;
+    background-size: cover; /* Ensure the image covers the container */
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Vendor profile form layout */
 .vendor-profile-form {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
 }
 
+/* Form group spacing */
 .form-group {
     margin-bottom: 15px;
 }
 
+/* Mandatory field indication */
 .mandatory::after {
     content: " *";
     color: red;
 }
 
+/* Label styling */
 label {
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
 }
 
+/* Input, select, and textarea styling */
 input,
 select,
 textarea {
@@ -61,12 +67,14 @@ textarea {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 textarea {
     height: 100px;
 }
 
+/* Button styling */
 button {
     padding: 10px 15px;
     background-color: #007bff;
@@ -74,18 +82,73 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
+/* Responsive heading */
 .vendor-profile-container h1 {
-    text-align: center; /* Center the heading */
+    text-align: center;
     font-size: 48px;
     color: #333;
 }
 
+/* Responsive layout for subheadings */
 h2 {
-    margin-top: 20px; /* Add space above subheadings */
+    margin-top: 20px;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 768px) {
+    .vendor-profile-container {
+        width: 95%; /* Adjust width for smaller screens */
+        background-size: contain; /* Ensure the image fits within the container */
+        background-position: center;
+        padding: 15px;
+    }
+
+    .vendor-profile-header {
+        height: 150px; /* Reduce header height for mobile view */
+        font-size: 28px; /* Adjust font size for smaller screens */
+    }
+
+    .vendor-profile-form {
+        padding: 15px; /* Reduce padding for mobile view */
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 14px; /* Smaller font size for inputs on mobile */
+    }
+
+    button {
+        width: 100%; /* Full-width button on mobile */
+        margin-top: 10px;
+    }
+}
+
+/* Further adjustments for very small screens (e.g., mobile phones) */
+@media (max-width: 480px) {
+    .vendor-profile-header {
+        font-size: 22px; /* Reduce font size further for small mobile screens */
+        height: 120px; /* Further reduce header height */
+    }
+
+    .vendor-profile-container h1 {
+        font-size: 32px; /* Smaller font size for the heading on small screens */
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 12px; /* Even smaller font size for inputs on small mobile screens */
+    }
+
+    button {
+        padding: 8px 12px; /* Reduce button padding for smaller screens */
+    }
 }
