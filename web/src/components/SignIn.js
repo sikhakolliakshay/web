@@ -19,26 +19,25 @@ const SignIn = () => {
   const onFinish = async (values) => {
     setLoading(true);
     const payload = {
-      identifier: values.username,
-      password: values.password,
+      identifier: values.username,  // This is either phone or account number
+      password: values.password,  // Plain-text password provided by the user
     };
-
+  
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/users/login`, payload);
-
+  
       if (response.status === 200 && response.data) {
         if (response.data.suspend) {
           message.error("Account Has Been Suspended. Contact Admin.");
           return;
         }
-
+  
+        // Save user ID to localStorage and navigate to user dashboard
         localStorage.setItem("userId", response.data._id);
         navigate("/users", { state: { user: response.data } });
-
+  
         const user = response.data;
-        const welcomeMessage = `Welcome ${
-          user.type === "ACADEMY" ? user.academyName : `${user.firstName} ${user.lastName}`
-        }`;
+        const welcomeMessage = `Welcome ${user.type === "ACADEMY" ? user.academyName : `${user.firstName} ${user.lastName}`}`;
         message.success(welcomeMessage);
       } else {
         message.error("Unexpected response from server.");
@@ -61,6 +60,7 @@ const SignIn = () => {
       setLoading(false);
     }
   };
+  
 
   const onFinishFailed = (errorInfo) => {
     message.error("Please check the form fields.");

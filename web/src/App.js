@@ -20,6 +20,7 @@ import FilePage from './components/FilePage';
 import CvsPage from './components/CvsPage';
 import EditProfile from './components/EditProfile';
 import EditContactInfo from './components/EditContactInfo';
+import Password from './components/PasswordReset';
 import './i18n'; //Import i18n configuration
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         <Route path="/cvs" element={<CvsPage />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/edit-contact-info" element={<EditContactInfo />} />
+        <Route path="/Password" element={<Password/>} />
 
         {/* Fallback route */}
         <Route path="*" element={<SignIn />} />

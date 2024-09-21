@@ -84,6 +84,9 @@ function AccountPage() {
     } else if (item === 'EditProfile') {
       navigate('/edit-profile');
     }
+    else if (item === 'PasswordReset') {
+      navigate('/Password');
+    }
   };
 
   return (
@@ -145,6 +148,9 @@ function AccountPage() {
           </button>
           <button className="add-option-button" onClick={() => handleAddNewItem('Files')}>
             <FileOutlined /> {t("files")}
+          </button>
+          <button className="add-option-button" onClick={() => handleAddNewItem('PasswordReset')}>
+            <FileOutlined /> {t("PasswordReset")}
           </button>
         </div>
       )}

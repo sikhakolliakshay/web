@@ -89,7 +89,7 @@ function PlayerProfile() {
         
         if (response.status === 201) {
             alert('Registration successful!');
-            navigate('/users');
+            navigate('/');
         }
     } catch (error) {
         if (error.response) {
